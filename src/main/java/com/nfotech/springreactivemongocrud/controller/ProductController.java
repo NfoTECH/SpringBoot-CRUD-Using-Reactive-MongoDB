@@ -14,6 +14,11 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @PostMapping
+    public Mono<ProductDto> addProduct(@RequestBody Mono<ProductDto> productDtoMono) {
+        return productService.addProduct(productDtoMono);
+    }
+
     @GetMapping
     public Flux<ProductDto> getProducts() {
         return productService.getAllProducts();
@@ -34,11 +39,6 @@ public class ProductController {
     @GetMapping("/product-range/{min}/{max}")
     public Flux<ProductDto> getProductInRange(@PathVariable double min, @PathVariable double max) {
         return productService.getProductInRange(min, max);
-    }
-
-    @PostMapping
-    public Mono<ProductDto> addProduct(@RequestBody Mono<ProductDto> productDtoMono) {
-        return productService.addProduct(productDtoMono);
     }
 
     @PutMapping("/update/{id}")
