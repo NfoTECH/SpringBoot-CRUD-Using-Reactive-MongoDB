@@ -24,11 +24,13 @@ public class ProductController {
         return productService.getProductById(id);
     }
 
-//    @GetMapping("/product-range")
-//    public Flux<ProductDto> getProductBetweenRange(@RequestParam("min") double min, @RequestParam("max") double max) {
-//        return productService.getProductInRange(min, max);
-//    }
+    // Get product by price range using query parameters
+    @GetMapping("/product-range")
+    public Flux<ProductDto> getProductBetweenRange(@RequestParam("min") double min, @RequestParam("max") double max) {
+        return productService.getProductInRange(min, max);
+    }
 
+    // Get product by price range using path variables
     @GetMapping("/product-range/{min}/{max}")
     public Flux<ProductDto> getProductInRange(@PathVariable double min, @PathVariable double max) {
         return productService.getProductInRange(min, max);
